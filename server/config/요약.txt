@@ -1,0 +1,52 @@
+boiler plate이용 => server config폴더에서 어떤 작업환경에서 앱을 만들건지 살펴보자.
+ => dev.js라는 파일을 만들고 mongoDB사이트 주소 연결한다.
+ => Mongodb는 들어가서  cluster만들고 AWS, 공짜나라, 이름선정 후 생성 => clusters페이지에서 connect클릭 => connect your application선택
+ => url복사후 dev.js에 붙여넣기. 하고 Database access에서 User생성한다. 아디랑 비번 url에 적용. dbname은 atlas들어가면 파란칠한게 그 이름이다. 
+
+ 1. 비어있는 업로드 페이지 생성. =>view 폴더에 upload폴더 파일 생성 
+ 2. 업로드 페이지 router만들기 => product/upload 로 path생성. 
+ 3. 업로드 페이지 탭 만들기. => rightmenu component에 만든 Uploadpage component추가!
+ 4. drop zone을 제외한 업로드 폼 만들기 => 파일 업로드만을 위한 컴포넌트 생성. css프레임워크 사용!
+ 5. 모든 Input을 위한 Onchange function 만들기 => functional component이기 때문에 state를 사용하기 위해 hooks를 사용. 
+ 6. Continent Select 만들기
+
+ <파일 업로드 컴포넌트>
+ 1. 다른 곳에서 가져다 쓸 수 있는 기능들이 집합된 폴더를 만든다. 
+ 2. dropzone 라이브러리 다운로드 받기 => npm install react-dropzone, 구글링해서 코드 따와서 Fileupload에 복붙
+ 3. File upload 컴포넌트를 위한 UI만들기 => 
+ 4. onDropFunction을 만든다 => 파일을 올리면 백엔드에서 저장을 해주고 저장해준 파일의 정보를 프론트엔드로 가져온다. (router처리도 나옴)
+             파일전달(=>)
+ FrontEnd <==========> Backend (파일저장, multer필요) => npm install multer --save
+            (<=)파일정보 전달
+
+ 사진을 업로드 하고 확인 버튼을 눌렀을 때, 그 사진을 백엔드에도 전해줘야 한다. 왜??? 서버에 보내고 db에 입력한 걸 저장해야ㅑ 되니까. 
+ 그러기 위해선 업로드한 사진을 어디다가 저장을 해야되는데, 그걸 state에다가 저장한다. (??)
+ 
+ db에 입력한 정보를 보내줘야 하기 때문에 입력한 정보들을 잘 정리한 product model을 만든다. 
+ 서버/models/에 Product.js 파일 만들기.
+ 5. onDeleteFunction 만들기 => 업로드된 사진 클릭시 삭제기능
+ 6. FileUpload에 있는 이미지들 부모 Component로 옮기기. state끌어올리기. 
+ 7. onSubmit Function 만들기. 
+
+ <landing page 작성>
+ 1. 빈 랜딩 페이지 작성
+ 2. 몽고디비에 있는 데이터 가져오기. 
+ 3. DB에서 가져온 데이터를 state로 관리하고 이제 그 데이터를 가지고 카드로 만들어서 LandingPage에 렌더링한다.
+ 4. 카드 내 이미지 슬라이드만들기 => ant design => carousel이용 
+일단 여기까지..자자  전체적인 틀은 Upload페이지에서 upload한 정보들은 서버, 즉 db로 보내고 랜딩페이지에서 서버에서
+다시 가져와서 자동으로 랜딩되게 한다. 
+
+<더보기 버튼 만들기>
+몽고db메소드를 사용해야 한다. 
+skip => 어디서부터 데이터를 가져오는지에 대한 위치
+limit => 처음데이터를 가져올 때와 더보기 버튼을 눌러서 가져올때 얼마나 많은 데이터를 한번에 가져오는지.. 
+
+<checkbox 필터 만들기> - check box
+1. 리스트데이터 만들기. LandingPage폴더에 Sections폴더 만듬
+2. checkBox component만들기. 
+ Collapse와 Checkbox를 ant에서 가져온다. 
+ 서버처리하는 부분=> check된 박스를 db에서 가져와서 렌더링되게 하는것. 
+
+<radio Btn 필터 만들기>  - check box와 거의 비슷하지만 하나만 눌려야 한다. 
+1. Radio box 데이터 리스트 만들기. 
+

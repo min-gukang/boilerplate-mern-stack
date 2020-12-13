@@ -35,6 +35,11 @@ app.use(cookieParser());
 
 app.use('/api/users', require('./routes/users'));
 
+// 넘어온 파일을 저장할때 이런식으로 해주면 파일이 매우 길어진다. 따로 라우트처리를해서 파일로 관리하는게 좋음. 
+// app.post('api/product/image', )
+app.use('/api/product', require('./routes/product')) // api/product로 오는 요청은 routes/product로 넘겨서 처리하라. 
+
+
 
 //use this to show the image you have in node js server to client (react js)
 //https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
@@ -52,6 +57,8 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
   });
 }
+
+
 
 const port = process.env.PORT || 5000
 
